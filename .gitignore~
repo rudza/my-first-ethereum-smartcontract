@@ -1,0 +1,16 @@
+node_modules
+html/maps/tiles
+wp-config.php
+html/wp-content/uploads
+/config
+npm-debug.log
+vendor
+/log.txt
+html/css/*
+html/js/*bundle.js
+html/generator/posters/*
+*.map
+services/capture/tiles
+services/capture/captures
+services/mockup/mockups
+services/tileserver/*.mbtiles
