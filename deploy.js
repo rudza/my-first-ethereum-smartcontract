@@ -5,20 +5,19 @@ const { interface, bytecode } = require('./compile');
 const mnemonic = 'tool chunk sea exact idle improve settle coin artist device world where';
 const network = 'https://rinkeby.infura.io/hAfGuBIc5HOySndzMPPU';
 const provider = new HDWalletProvider(mnemonic, network);
-const web3 = new Web3(provider)
+const web3 = new Web3(provider);
 const INITIAL_MESSAGE = 'Hello';
 
 const deploy = async () => {
-  const accounts = await web3.eth.getAccounts()
-  console.log('Attempting to deploy from account', accounts[0])
+  const accounts = await web3.eth.getAccounts();
+  console.log('Attempting to deploy from account', accounts[0]);
 
   // Use one of those accounts to deploy the contract
   const result = await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({ data: bytecode, arguments: [INITIAL_MESSAGE] })
-    .send({ from: accounts[0], gas: '500000' }); // Can't be deployed
-    // (node:16953) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: The contract code couldn't be stored, please check your gas limit.
+    .deploy({ data: `0x${bytecode}`, arguments: [INITIAL_MESSAGE] })
+    .send({ from: accounts[0], gas: '500000' });
 
-  console.log('Contract deployed', result.options.address)
+  console.log('Contract deployed', result.options.address);
 
   result.setProvider(provider);
 };
